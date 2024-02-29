@@ -1,2 +1,12 @@
-# v2ray-openvpn_setup
-in this repo we will setup v2ray server and openvpn server on linux machine(debian)
+![baner](https://github.com/Ghosts6/Local-website/blob/main/img/Baner.png)
+
+# v2ray&openvpn
+
+# usage:
+
+# setup.sh: 
+
+# manual_setup.sh:
+
+# scripts:
+
