@@ -1,6 +1,6 @@
 ![baner](https://github.com/Ghosts6/Local-website/blob/main/img/Baner.png)
 
-# v2ray&openvpn
+# v2ray&openvpn:
 
 # usage:
 
