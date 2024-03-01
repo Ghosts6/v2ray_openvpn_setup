@@ -307,7 +307,9 @@ sudo ufw reload
 echo "Script execution completed."
 ```
 
-# <i class="las la-tachometer-alt" style="font-size: 24px;"></i>scripts:
+# <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="currentColor">
+  <path d="M496 288h-35.39c-7.6 0-14.7-4.5-17.7-11.4l-26.3-52.5-53 106.1c-2.3 4.5-7 7.5-12.4 7.5h-118c-5.4 0-10.1-3-12.4-7.5l-53-106.1-26.3 52.5c-3 6.9-10.1 11.4-17.7 11.4H16C7.2 288 0 295.2 0 304v64c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-64c0-8.8-7.2-16-16-16zM320 224h-128c-35.3 0-64 28.7-64 64s28.7 64 64 64h128c35.3 0 64-28.7 64-64s-28.7-64-64-64z"/>
+</svg> scripts:
 
 we also provide some bash file to manage service include start.sh with help of this file you are be able to start and enable services , stop.sh for stop services
 ,status.sh for cheking services status and optimize.sh for boost and optimize services by updating package and clean cach , optimize ports 
