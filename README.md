@@ -10,12 +10,17 @@
 
 
 
+```bash
+chmod +x start.sh stop.sh setup.sh status.sh optimize.sh manual_setup.sh
+./example.sh
+```
+
 # 📱setup.sh: 
 
-
+With setup.sh, you can easily configure V2Ray, OpenVPN, or both at same time. The script automates the preparation of requirements, configures the necessary firewall rules during setup, and setup will be end by entering some  input such as domain, preferred services, and more, streamlining the service setup process.
 
 setup.sh:
-```python
+```bash
 #!/bin/bash
 
 echo "Updating software..."
@@ -264,10 +269,11 @@ echo "Installation completed."
 ```
 # 🖥️manual_setup.sh:
 
-
+For pepole who seek configurability and accessibility, our manual_setup.sh script allows you to customize your services. Simply run
+./manual_setup.sh to take full control of the configuration process
 
 manual setup:
-```python
+```bash
 #!/bin/bash
 
 echo "Updating software..."
