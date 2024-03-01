@@ -2,7 +2,9 @@
 
 # 🌎v2ray&openvpn:
 
-
+This repo include bash files to setup and manage service like v2ray and openvpn 
+in this repo we place two setup method and some scripts which you can use for service
+management
 
 
 
