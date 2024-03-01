@@ -3,7 +3,7 @@
 # 🌎v2ray&openvpn:
 
 
-![V2Ray Icon](v2ray.png) ![OpenVPN Icon](openvpn.jpg)
+
 
 
 # usage:
@@ -307,7 +307,11 @@ sudo ufw reload
 echo "Script execution completed."
 ```
 
-# scripts:
+# <i class="las la-tachometer-alt" style="font-size: 24px;"></i>scripts:
+
+we also provide some bash file to manage service include start.sh with help of this file you are be able to start and enable services , stop.sh for stop services
+,status.sh for cheking services status and optimize.sh for boost and optimize services by updating package and clean cach , optimize ports 
+, restart services and ect ...
 
 # 💻services:
 
