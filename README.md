@@ -8,7 +8,7 @@
 
 # 📖usage:
 
-
+To using this files, clone the repository using the command: git clone https://github.com/Ghosts6/v2ray_openvpn_setup.git. Ensure executable permissions by running chmod +x filename on the relevant file. Depending on your requirements, execute the desired file by running ./filename. This sequence allows seamless access and execution of the provided files from the repository.
 
 ```bash
 chmod +x start.sh stop.sh setup.sh status.sh optimize.sh manual_setup.sh
