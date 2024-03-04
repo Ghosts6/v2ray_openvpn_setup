@@ -3,6 +3,10 @@
 echo "Updating software..."
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
 
+echo "Enableing ip forwarding.."
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -p
+
 echo "Installing firewall..."
 sudo apt-get install ufw
 
