@@ -39,8 +39,8 @@ case $choice in
         snap install core
         snap install --classic certbot
         ln -s /snap/bin/certbot /usr/bin/certbot
-#       echo "nginx configuretion:"
-#       certbot --nginx    #  un commend if you need nginx service also un commend nginx config section too
+        echo "nginx configuretion:"
+        certbot --nginx   
         echo "v2ray setup..."
         wget --no-check-certificate https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
         bash install-release.sh
@@ -99,19 +99,19 @@ case $choice in
         }" | sudo tee "$config_file" > /dev/null
 
         # nginx config     
-#        cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
-#location /144c0889 {
-#    proxy_redirect off;
-#    proxy_pass http://127.0.0.1:10000;
-#    proxy_http_version 1.1;
-#    proxy_set_header Upgrade \$http_upgrade;
-#    proxy_set_header Connection "upgrade";
-#    proxy_set_header Host \$http_host;
-#    # Show real IP if you enable V2Ray access log
-#   proxy_set_header X-Real-IP \$remote_addr;
-#    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-#}
-#EOL
+         cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+ location /144c0889 {
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:10000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host \$http_host;
+    # Show real IP if you enable V2Ray access log
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+ }
+EOL
         systemctl enable v2ray
         systemctl start v2ray
         ;;
@@ -207,19 +207,19 @@ case $choice in
         }" | sudo tee "$config_file" > /dev/null
 
         # nginx config     
-#       cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
-#location /144c0889 {
-#    proxy_redirect off;
-#    proxy_pass http://127.0.0.1:10000;
-#    proxy_http_version 1.1;
-#    proxy_set_header Upgrade \$http_upgrade;
-#    proxy_set_header Connection "upgrade";
-#    proxy_set_header Host \$http_host;
-#    # Show real IP if you enable V2Ray access log
-#   proxy_set_header X-Real-IP \$remote_addr;
-#    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-#}
-#EOL
+       cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+ location /144c0889 {
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:10000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host \$http_host;
+    # Show real IP if you enable V2Ray access log
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+ }
+ EOL
         systemctl enable v2ray
         systemctl start v2ray
 
