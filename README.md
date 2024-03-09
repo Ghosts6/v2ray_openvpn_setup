@@ -28,7 +28,7 @@ setup.sh:
 echo "Updating software..."
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
 
-echo "Enableing ip forwarding.."
+echo "Enabling IP forwarding..."
 sudo sysctl -w net.ipv4.ip_forward=1
 sudo sysctl -p
 
@@ -64,7 +64,7 @@ case $choice in
         snap install core
         snap install --classic certbot
         ln -s /snap/bin/certbot /usr/bin/certbot
-        echo "nginx configuretion:"
+        echo "nginx configuration:"
         certbot --nginx   
         echo "v2ray setup..."
         wget --no-check-certificate https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
@@ -124,8 +124,8 @@ case $choice in
         }" | sudo tee "$config_file" > /dev/null
 
         # nginx config     
-         cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
- location /144c0889 {
+        cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+location /144c0889 {
     proxy_redirect off;
     proxy_pass http://127.0.0.1:10000;
     proxy_http_version 1.1;
@@ -135,7 +135,7 @@ case $choice in
     # Show real IP if you enable V2Ray access log
     proxy_set_header X-Real-IP \$remote_addr;
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
- }
+}
 EOL
         systemctl enable v2ray
         systemctl start v2ray
@@ -143,20 +143,20 @@ EOL
 
     2)
         echo "Installing openvpnserver..."
-        echo "your ip is ...."
+        echo "Your IP is ...."
         sudo apt-get install curl && sudo apt-get install wget
         curl ifconfig.me || wget -qO- ifconfig.me
         wget https://git.io/vpn -O openvpn-install.sh
         sudo chmod +x openvpn-install.sh
-        echo "please fill data based on your need ..."
+        echo "Please fill in data based on your need..."
         sudo bash openvpn-install.sh
         sudo systemctl start openvpn-server@server.service
 
-        read -p "Do you want to create a new client? (y/n): " answer
-        if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+        read -p "Do you want to create a new client for OpenVPN? (y/n): " answer_openvpn
+        if [[ "$answer_openvpn" == "y" || "$answer_openvpn" == "Y" ]]; then
             sudo bash openvpn-install.sh
         else
-            echo "OpenVPN installation completed ."
+            echo "OpenVPN installation completed."
         fi
         ;;
     3)
@@ -172,7 +172,7 @@ EOL
         snap install core
         snap install --classic certbot
         ln -s /snap/bin/certbot /usr/bin/certbot
-        echo "nginx configuretion:"
+        echo "nginx configuration:"
         certbot --nginx    
         echo "v2ray setup..."
         wget --no-check-certificate https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
@@ -232,8 +232,8 @@ EOL
         }" | sudo tee "$config_file" > /dev/null
 
         # nginx config     
-       cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
- location /144c0889 {
+        cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+location /144c0889 {
     proxy_redirect off;
     proxy_pass http://127.0.0.1:10000;
     proxy_http_version 1.1;
@@ -243,8 +243,8 @@ EOL
     # Show real IP if you enable V2Ray access log
     proxy_set_header X-Real-IP \$remote_addr;
     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
- }
- EOL
+}
+EOL
         systemctl enable v2ray
         systemctl start v2ray
 
@@ -272,6 +272,7 @@ EOL
 esac
 
 echo "Installation completed."
+
 ```
 # 🖥️manual_setup.sh:
 
