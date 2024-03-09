@@ -147,8 +147,8 @@ EOL
         snap install core
         snap install --classic certbot
         ln -s /snap/bin/certbot /usr/bin/certbot
-#       echo "nginx configuretion:"
-#       certbot --nginx    #  un commend if you need nginx service also un commend nginx config section too
+        echo "nginx configuretion:"
+        certbot --nginx    
         echo "v2ray setup..."
         wget --no-check-certificate https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
         bash install-release.sh
