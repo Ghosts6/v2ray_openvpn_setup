@@ -65,114 +65,6 @@ case $choice in
         snap install --classic certbot
         ln -s /snap/bin/certbot /usr/bin/certbot
         echo "nginx configuretion:"
-        certbot --nginx    
-        echo "v2ray setup..."
-        wget --no-check-certificate https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
-        bash install-release.sh
-        sudo apt-get install uuid -y
-        uuid=$(uuid -v 4)
-        hex_number=$(openssl rand -hex 4)
-        config_file="/usr/local/etc/v2ray/config.json"
-        echo "{
-          \"log\": {
-            \"loglevel\": \"warning\",
-            \"access\": \"/var/log/v2ray/access.log\",
-            \"error\": \"/var/log/v2ray/error.log\"
-          },
-          \"inbounds\": [{
-            \"port\": 10000,
-            \"protocol\": \"vmess\",
-            \"settings\": {
-              \"clients\": [
-                {
-                  \"id\": \"$uuid\",
-                  \"level\": 1,
-                  \"alterId\": 4
-                }
-              ]
-            },
-            \"streamSettings\": {
-              \"network\": \"ws\",
-              \"wsSettings\": {
-                \"path\": \"$hex_number\"
-              }
-            }
-          }],
-          \"outbounds\": [{
-            \"protocol\": \"socks\",
-            \"settings\": {
-              \"servers\": [{
-                \"address\": \"127.0.0.1\",
-                \"port\": 9050,
-                \"auth\": \"noauth\"
-              }]
-            }
-          },{
-            \"protocol\": \"blackhole\",
-            \"settings\": {},
-            \"tag\": \"blocked\"
-          }],
-          \"routing\": {
-            \"rules\": [
-              {
-                \"type\": \"field\",
-                \"ip\": [\"geoip:private\"],
-                \"outboundTag\": \"blocked\"
-              }
-            ]
-          }
-        }" | sudo tee "$config_file" > /dev/null
-
-         nginx config     
-         cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
- location /144c0889 {
-     proxy_redirect off;
-     proxy_pass http://127.0.0.1:10000;
-     proxy_http_version 1.1;
-     proxy_set_header Upgrade \$http_upgrade;
-     proxy_set_header Connection "upgrade";
-     proxy_set_header Host \$http_host;
-     # Show real IP if you enable V2Ray access log
-    proxy_set_header X-Real-IP \$remote_addr;
-     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
- }
- EOL
-        systemctl enable v2ray
-        systemctl start v2ray
-        ;;
-
-    2)
-        echo "Installing openvpnserver..."
-        echo "your ip is ...."
-        sudo apt-get install curl && sudo apt-get install wget
-        curl ifconfig.me || wget -qO- ifconfig.me
-        wget https://git.io/vpn -O openvpn-install.sh
-        sudo chmod +x openvpn-install.sh
-        echo "please fill data based on your need ..."
-        sudo bash openvpn-install.sh
-        sudo systemctl start openvpn-server@server.service
-
-        read -p "Do you want to create a new client? (y/n): " answer
-        if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
-            sudo bash openvpn-install.sh
-        else
-            echo "OpenVPN installation completed ."
-        fi
-        ;;
-    3)
-        echo "Installing both v2ray and openvpnserver..."
-        # Install v2ray (case 1)
-        echo "Installing v2ray..."
-        sudo apt-get install nginx -y
-        sudo apt-get install wget
-
-        read -p "Please enter your domain (example.com): " domain
-        sudo sed -i "s/server_name _;/server_name $domain;/g" /etc/nginx/sites-available/default
-        systemctl restart nginx
-        snap install core
-        snap install --classic certbot
-        ln -s /snap/bin/certbot /usr/bin/certbot
-        echo "nginx configuretion:"
         certbot --nginx   
         echo "v2ray setup..."
         wget --no-check-certificate https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
@@ -231,18 +123,126 @@ case $choice in
           }
         }" | sudo tee "$config_file" > /dev/null
 
-          nginx config     
-        cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+        # nginx config     
+         cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
  location /144c0889 {
-     proxy_redirect off;
-     proxy_pass http://127.0.0.1:10000;
-     proxy_http_version 1.1;
-     proxy_set_header Upgrade \$http_upgrade;
-     proxy_set_header Connection "upgrade";
-     proxy_set_header Host \$http_host;
-     # Show real IP if you enable V2Ray access log
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:10000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host \$http_host;
+    # Show real IP if you enable V2Ray access log
     proxy_set_header X-Real-IP \$remote_addr;
-     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+ }
+EOL
+        systemctl enable v2ray
+        systemctl start v2ray
+        ;;
+
+    2)
+        echo "Installing openvpnserver..."
+        echo "your ip is ...."
+        sudo apt-get install curl && sudo apt-get install wget
+        curl ifconfig.me || wget -qO- ifconfig.me
+        wget https://git.io/vpn -O openvpn-install.sh
+        sudo chmod +x openvpn-install.sh
+        echo "please fill data based on your need ..."
+        sudo bash openvpn-install.sh
+        sudo systemctl start openvpn-server@server.service
+
+        read -p "Do you want to create a new client? (y/n): " answer
+        if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+            sudo bash openvpn-install.sh
+        else
+            echo "OpenVPN installation completed ."
+        fi
+        ;;
+    3)
+        echo "Installing both v2ray and openvpnserver..."
+        # Install v2ray (case 1)
+        echo "Installing v2ray..."
+        sudo apt-get install nginx -y
+        sudo apt-get install wget
+
+        read -p "Please enter your domain (example.com): " domain
+        sudo sed -i "s/server_name _;/server_name $domain;/g" /etc/nginx/sites-available/default
+        systemctl restart nginx
+        snap install core
+        snap install --classic certbot
+        ln -s /snap/bin/certbot /usr/bin/certbot
+        echo "nginx configuretion:"
+        certbot --nginx    
+        echo "v2ray setup..."
+        wget --no-check-certificate https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh
+        bash install-release.sh
+        sudo apt-get install uuid -y
+        uuid=$(uuid -v 4)
+        hex_number=$(openssl rand -hex 4)
+        config_file="/usr/local/etc/v2ray/config.json"
+        echo "{
+          \"log\": {
+            \"loglevel\": \"warning\",
+            \"access\": \"/var/log/v2ray/access.log\",
+            \"error\": \"/var/log/v2ray/error.log\"
+          },
+          \"inbounds\": [{
+            \"port\": 10000,
+            \"protocol\": \"vmess\",
+            \"settings\": {
+              \"clients\": [
+                {
+                  \"id\": \"$uuid\",
+                  \"level\": 1,
+                  \"alterId\": 4
+                }
+              ]
+            },
+            \"streamSettings\": {
+              \"network\": \"ws\",
+              \"wsSettings\": {
+                \"path\": \"$hex_number\"
+              }
+            }
+          }],
+          \"outbounds\": [{
+            \"protocol\": \"socks\",
+            \"settings\": {
+              \"servers\": [{
+                \"address\": \"127.0.0.1\",
+                \"port\": 9050,
+                \"auth\": \"noauth\"
+              }]
+            }
+          },{
+            \"protocol\": \"blackhole\",
+            \"settings\": {},
+            \"tag\": \"blocked\"
+          }],
+          \"routing\": {
+            \"rules\": [
+              {
+                \"type\": \"field\",
+                \"ip\": [\"geoip:private\"],
+                \"outboundTag\": \"blocked\"
+              }
+            ]
+          }
+        }" | sudo tee "$config_file" > /dev/null
+
+        # nginx config     
+       cat <<EOL | sudo tee -a /etc/nginx/sites-available/default > /dev/null
+ location /144c0889 {
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:10000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host \$http_host;
+    # Show real IP if you enable V2Ray access log
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
  }
  EOL
         systemctl enable v2ray
