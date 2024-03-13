@@ -1,6 +1,6 @@
 ![baner](https://github.com/Ghosts6/Local-website/blob/main/img/Baner.png)
 
-# 🌎v2ray&openvpn:
+# 🌎v2ray,openvpn&squid:
 
 This repo include bash files to setup and manage service like v2ray and openvpn 
 in this repo we place two setup method and some scripts which you can use them for service
