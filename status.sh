@@ -6,5 +6,7 @@ sudo systemctl is-active openvpn@server
 echo "checking v2ray status ..."
 sudo systemctl status v2ray
 sudo systemctl is-active v2ray
+echo "Checking Squid status ..."
+sudo systemctl status squid
 
 echo "end of operations"
