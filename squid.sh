@@ -72,6 +72,7 @@ if [[ "$choice" == 'y' || "$choice" == 'Y' ]]; then
     sudo systemctl restart squid
     sudo systemctl status squid
 
+    echo "End of program."
 else
     echo "End of program."
 fi
