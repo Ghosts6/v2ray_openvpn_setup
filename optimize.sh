@@ -38,5 +38,6 @@ echo "* hard nofile 65536" | sudo tee -a /etc/security/limits.conf
 echo "Restarting services..."
 sudo systemctl restart v2ray
 sudo systemctl restart openvpn@server || sudo systemctl restart openvpn-server@server.service
+sudo systemctl restart squid
 
 echo "Optimization completed."
