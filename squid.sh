@@ -22,12 +22,12 @@ sudo ufw allow $port
 sudo ufw reload
 sudo ufw status
 
-echo "startin service..."
+echo "starting service..."
 sudo systemctl restart squid
 sudo systemctl status squid
 
 echo "create user..."
-apt-get install apache2-utils -y
+sudo apt-get install apache2-utils -y
 sudo touch /etc/squid/passwd
 sudo chown proxy: /etc/squid/passwd
 
